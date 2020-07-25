@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador Estudiantes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Administrador Estudiantes</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./index.html" class="btn btn-success btn-sm">Volver</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="container mt-4">
+
+        <h3>Registrar nuevo estudiante</h3>
+        <form id="form" onsubmit="send(event)">
+            <div class="form-row">
+                <div class="col col-4">
+                    <div class="form-group">
+                        <label for="nombre_completo">Nombre completo</label>
+                        <input type="text" class="form-control" required name="nombre">
+                    </div>
+                </div>
+                <div class="col col-4">
+                    <div class="form-group">
+                        <label for="nombre_completo">Identificación</label>
+                        <input type="text" class="form-control" required name="identificacion">
+                    </div>
+                </div>
+                <div class="col col-4">
+                    <div class="form-group">
+                        <label for="nombre_completo">Curso</label>
+                        <input type="text" class="form-control" required name="curso">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <button class="btn btn-success" type="submit">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </section>
+
+
+    <script>
+    
+        function send(ev) {
+
+            ev.preventDefault();
+
+            const data = document.querySelector('#form');
+            const form = new FormData(data);
+
+            fetch('api.php?q=create', {
+                method: 'post',
+                body: form
+            }).then(() => {
+                window.location.href = 'index.html'
+            });
+        }
+
+    </script>
+
+</body>
+</html>

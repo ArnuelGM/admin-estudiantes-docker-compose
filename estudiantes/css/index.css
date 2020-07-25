@@ -1,0 +1,7 @@
+.estudiante_buttons {
+    opacity: 0;
+    transition: ease all .3s;
+}
+.estudiante:hover .estudiante_buttons {
+    opacity: 1;
+}

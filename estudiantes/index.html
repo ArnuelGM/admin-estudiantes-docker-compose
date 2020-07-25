@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador Estudiantes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+
+    <div id="app">
+        <header>
+            <nav class="navbar navbar-light bg-light">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Administrador Estudiantes</a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="./new.html" class="btn btn-success btn-sm">Nuevo Estudiante</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <section class="container mt-4">
+
+            <table class="table table-hover">
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre completo</th>
+                        <th>Identificación</th>
+                        <th>Curso</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="estudiante" v-for="(est, index) in estudiantes">
+                        <td width="30">{{ index +1 }}</td>
+                        <td>{{ est.nombre }}</td>
+                        <td width="150">{{ est.identificacion }}</td>
+                        <td width="100">{{ est.curso }}</td>
+
+                        <td class="estudiante_actions" width="150">
+                            <div class="estudiante_buttons">
+                                <a href="#" @click="deleteEstudiante(est.id)" class="btn btn-sm btn-link">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </section>
+    </div>
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!-- main -->
+    <script>
+    
+        new Vue({
+            el: '#app',
+
+            data: {
+                estudiantes: []
+            },
+
+            methods: {
+                deleteEstudiante(id) {
+                    fetch('api.php?q=delete&id='+id)
+                    .then(() => {
+                        this.obtenerEstudiantes();
+                    });
+                },
+
+                obtenerEstudiantes() {
+                    fetch('api.php')
+                    .then(data => data.json())
+                    .then( (data) => {
+                        this.estudiantes = data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        alert("Error. No se pudo obtener ningun registro.");
+                    });
+                }
+            },
+
+            mounted() {
+                
+                this.obtenerEstudiantes();
+
+            }
+        })
+
+    </script>
+
+</body>
+</html>
