@@ -4,8 +4,6 @@ RUN docker-php-ext-install pdo
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install mysqli
 
-COPY ./estudiantes /var/www/html
-
 WORKDIR /var/www/html
 
 EXPOSE 8080
