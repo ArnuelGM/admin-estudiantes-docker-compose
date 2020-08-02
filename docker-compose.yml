@@ -8,6 +8,7 @@ services:
       - .env
     volumes: 
       - ./estudiantes.sql:/docker-entrypoint-initdb.d/estudiantes.sql
+      - ./data/:/var/lib/mysql/
 
   db_admin:
     image: bitnami/phpmyadmin:latest
@@ -30,3 +31,12 @@ services:
       - .env
     ports: 
       - "80:8080"
+  
+  editor:
+    image: codercom/code-server
+    container_name: editor
+    volumes: 
+      - ./estudiantes/:/home/coder/project/
+      - ./config_editor/:/home/coder/.config/
+    ports: 
+      - "8080:8080"

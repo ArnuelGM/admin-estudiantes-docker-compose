@@ -12,6 +12,8 @@ $ docker-compose down
 ```
 
 
-## Para ver la aplicación
+## Para ver las aplicaciones
 
-Ingresar por el navegador a la ruta `localhost` para ver la aplicacion y `localhost:81` para ingresar al cliente de base de datos phpMyadmin
+ - localhost - Aplicación
+ - localhost:81 - phpmyadmin
+ - localhost:8080 - Editor (la contraseña se genera en `config_editor/code-server/config.yml`)
